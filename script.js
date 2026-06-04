@@ -39,7 +39,7 @@ function initReviews() {
     });
 
     const service = new google.maps.places.PlacesService(map);
-    const placeId = 'YOUR_PLACE_ID_HERE';
+    const placeId = 'ChIJ27lfF2ld5IkRy7vZ6OJp0u0';
 
     service.getDetails({
         placeId: placeId,
