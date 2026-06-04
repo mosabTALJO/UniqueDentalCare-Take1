@@ -1,0 +1,19 @@
+/* Custom styles for glassmorphism and smooth animations */
+.glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #0B1E36, #1A365D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Style for the select dropdown options */
+select option {
+    background-color: #0B1E36;
+    color: white;
+}

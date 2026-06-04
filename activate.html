@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate FormSubmit</title>
+</head>
+<body style="font-family: sans-serif; padding: 40px; text-align: center;">
+    <h2>Step 1: Activate Your Email</h2>
+    <p>FormSubmit requires you to complete a CAPTCHA and activate your email on the very first submission.</p>
+    <p>Because your main website uses a background AJAX submission (which hides this CAPTCHA), the activation is getting blocked.</p>
+    
+    <div style="margin-top: 30px; padding: 20px; border: 1px solid #ccc; display: inline-block;">
+        <form action="https://formsubmit.co/mosabtaljo@gmail.com" method="POST">
+            <input type="text" name="name" value="Test Activation" hidden>
+            <button type="submit" style="padding: 10px 20px; font-size: 16px; background: #0B1E36; color: white; border: none; cursor: pointer;">
+                Click Here to Activate FormSubmit
+            </button>
+        </form>
+    </div>
+
+    <p style="margin-top: 30px; color: #555;">
+        <strong>Instructions:</strong><br>
+        1. Click the button above.<br>
+        2. Complete the CAPTCHA if prompted.<br>
+        3. Check your email (including spam) for the activation link and click it.<br>
+        4. Once activated, your main website's AJAX form will work perfectly!
+    </p>
+</body>
+</html>
