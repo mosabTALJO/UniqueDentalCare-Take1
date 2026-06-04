@@ -49,8 +49,8 @@ function initReviews() {
             const container = document.getElementById('reviews-container');
             container.innerHTML = ''; // Clear the container
 
-            // Filter for reviews with 4 or more stars
-            const highReviews = place.reviews.filter(review => review.rating >= 4);
+            // Filter for reviews with 4 or more stars and limit to 3
+            const highReviews = place.reviews.filter(review => review.rating >= 4).slice(0, 3);
 
             highReviews.forEach(review => {
                 const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
