@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unique Dental Care - Professional Dental Services</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta name="description" content="Unique Dental Care provides elevated clinical dentistry with over 30 years of experience. Services include general care, cosmetic dentistry, and dental implants.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +15,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Tailwind Config -->
     <script src="tailwind-config.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=1.0.0">
 </head>
 
 <body class="font-sans text-gray-800 bg-light antialiased">
@@ -238,82 +239,93 @@
     </section>
 
     <!-- Contact & Location Section -->
-    <section id="contact" class="py-24 bg-dark text-white">
+    <section id="contact" class="pt-32 pb-24 bg-dark text-white min-h-screen">
         <div class="max-w-[1920px] w-full mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 2xl:px-48">
-            <div class="flex flex-col lg:flex-row gap-16">
-                <!-- Form Column -->
-                <div class="lg:w-1/2">
-                    <h2 class="text-3xl font-sans font-bold mb-8 text-white">Request a Call Back</h2>
-                    <form action="https://formsubmit.co/ajax/mosabtaljo@gmail.com" method="POST" class="space-y-6 bg-white/5 p-8 rounded-xl border border-white/10 glass shadow-2xl" id="contactForm">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-200 mb-1">Full Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white placeholder-gray-400 transition-colors" placeholder="John Doe">
-                        </div>
-                        <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-200 mb-1">Phone Number Or
-                                Email</label>
-                            <input type="tel" id="phone" name="phone/email" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white placeholder-gray-400 transition-colors" placeholder="(555) 123-4567 or johndoe@email.com">
-                        </div>
-                        <div>
-                            <label for="reason" class="block text-sm font-medium text-gray-200 mb-1">Reason for
-                                Visit</label>
-                            <select id="reason" name="reason" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white transition-colors">
-                                <option value="" disabled selected>Select an option</option>
-                                <option value="General Checkup">General Checkup</option>
-                                <option value="Cosmetic Consultation">Cosmetic Consultation</option>
-                                <option value="Dental Implants">Dental Implants</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="w-full bg-accent hover:opacity-90 text-white font-medium px-6 py-3 rounded-md transition-colors duration-300 shadow-md uppercase tracking-wide">
-                            Submit Request
-                        </button>
-                    </form>
-                    <p class="mt-4 text-xs text-gray-400 opacity-80 text-center px-4">
-                        For your privacy, please do not include sensitive medical information or health history in this
-                        form.
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-10 lg:gap-y-12">
+                <!-- Top Left: Title & Subtext -->
+                <div>
+                    <h2 class="text-3xl font-sans font-bold mb-4 text-white">Request a Call Back</h2>
+                    <p class="text-gray-200 font-light leading-relaxed">
+                        Leave your details below and our team will get in touch with you shortly to schedule your appointment or answer any questions.
                     </p>
                 </div>
-
-                <!-- Location Column -->
-                <div class="lg:w-1/2 flex flex-col justify-between">
-                    <div>
-                        <h2 class="text-3xl font-sans font-bold mb-8 text-white">Visit Our Practice</h2>
-                        <div class="space-y-6 mb-10 text-gray-200">
-                            <div class="flex items-start">
-                                <svg class="w-6 h-6 mr-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                    </path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                                <div>
-                                    <h4 class="font-medium text-white mb-1 uppercase tracking-wide text-sm">Clinic
-                                        Address</h4>
-                                    <p class="font-light leading-relaxed">380 Elm St STE 5<br>North Attleborough, MA
-                                        02760</p>
-                                </div>
+                
+                <!-- Top Right: Title & Contact Info -->
+                <div>
+                    <h2 class="text-3xl font-sans font-bold mb-8 text-white">Visit Our Practice</h2>
+                    <div class="flex flex-col sm:flex-row gap-6 text-gray-200">
+                        <div class="flex items-start sm:w-5/12">
+                            <svg class="w-6 h-6 mr-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-medium text-white mb-1 uppercase tracking-wide text-sm">Clinic
+                                    Address</h4>
+                                <p class="font-light leading-relaxed">380 Elm St STE 5<br>North Attleborough, MA
+                                    02760</p>
                             </div>
-                            <div class="flex items-start">
-                                <svg class="w-6 h-6 mr-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                <div>
-                                    <h4 class="font-medium text-white mb-1 uppercase tracking-wide text-sm">Office Hours
-                                    </h4>
-                                    <ul class="font-light space-y-1">
-                                        <li>Mon - Thu: 9:00 AM - 5:00 PM</li>
-                                        <li>Fri - Sat - Sun: Closed</li>
-                                    </ul>
-                                </div>
+                        </div>
+                        <div class="flex items-start sm:w-7/12">
+                            <svg class="w-6 h-6 mr-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-medium text-white mb-1 uppercase tracking-wide text-sm">Office Hours
+                                </h4>
+                                <ul class="font-light space-y-1 whitespace-nowrap">
+                                    <li>Mon - Thu: 9:00 AM - 5:00 PM</li>
+                                    <li>Fri - Sat - Sun: Closed</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Maps Iframe Placeholder -->
-                    <div class="w-full h-[400px] rounded-xl overflow-hidden border-2 border-white/10 shadow-2xl bg-gray-800 relative group mt-auto">
+                <!-- Bottom Left: Form -->
+                <div class="h-full">
+                    <form action="https://formsubmit.co/ajax/mosabtaljo@gmail.com" method="POST" class="h-full flex flex-col justify-between bg-white/5 p-8 rounded-xl border border-white/10 glass shadow-2xl" id="contactForm">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-200 mb-1">Full Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white placeholder-gray-400 transition-colors" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-200 mb-1">Phone Number Or
+                                    Email</label>
+                                <input type="tel" id="phone" name="phone/email" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white placeholder-gray-400 transition-colors" placeholder="(555) 123-4567 or johndoe@email.com">
+                            </div>
+                            <div>
+                                <label for="reason" class="block text-sm font-medium text-gray-200 mb-1">Reason for
+                                    Visit</label>
+                                <select id="reason" name="reason" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white transition-colors">
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="General Checkup">General Checkup</option>
+                                    <option value="Cosmetic Consultation">Cosmetic Consultation</option>
+                                    <option value="Dental Implants">Dental Implants</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <button type="submit" class="w-full bg-accent hover:opacity-90 text-white font-medium px-6 py-3 rounded-md transition-colors duration-300 shadow-md uppercase tracking-wide">
+                                Submit Request
+                            </button>
+                            <p class="mt-4 text-xs text-gray-400 opacity-80 text-center px-4">
+                                For your privacy, please do not include sensitive medical information or health history in this
+                                form.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Bottom Right: Map -->
+                <div>
+                    <div class="w-full h-full min-h-[400px] rounded-xl overflow-hidden border-2 border-white/10 shadow-2xl bg-gray-800 relative group">
                         <div class="absolute inset-0 pointer-events-none sm:bg-gray-900/30 sm:backdrop-blur-[2px] group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 z-10">
                         </div>
-                        <iframe src="https://www.google.com/maps/embed?pb=!4v1780569599500!6m8!1m7!1sJfEukm7tJrm6ZoYXILpbnw!2m2!1d41.97429929623512!2d-71.3193573965758!3f70.14558246808397!4f12.36730730188306!5f0.7820865974627469" class="w-full h-full" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!4v1780569599500!6m8!1m7!1sJfEukm7tJrm6ZoYXILpbnw!2m2!1d41.97429929623512!2d-71.3193573965758!3f70.14558246808397!4f12.36730730188306!5f0.7820865974627469" class="w-full h-full absolute inset-0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
