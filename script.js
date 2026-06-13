@@ -75,3 +75,27 @@ function initReviews() {
         }
     });
 }
+
+// Mobile Sticky CTA Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const stickyCta = document.getElementById('mobile-sticky-cta');
+    const heroSection = document.getElementById('hero');
+    const contactSection = document.getElementById('contact');
+
+    if (stickyCta && heroSection && contactSection) {
+        window.addEventListener('scroll', () => {
+            // Only apply on mobile devices (sm breakpoint is 640px in Tailwind)
+            if (window.innerWidth >= 640) return;
+
+            const heroBottom = heroSection.getBoundingClientRect().bottom;
+            const contactTop = contactSection.getBoundingClientRect().top;
+            
+            // Show if we scrolled past hero AND haven't reached contact yet
+            if (heroBottom < 0 && contactTop > window.innerHeight - 50) {
+                stickyCta.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+            } else {
+                stickyCta.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+            }
+        });
+    }
+});
