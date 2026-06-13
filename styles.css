@@ -7,13 +7,13 @@
 }
 
 .text-gradient {
-    background: linear-gradient(135deg, #0B1E36, #1A365D);
+    background: linear-gradient(135deg, #005FC6, #32CCC1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 /* Style for the select dropdown options */
 select option {
-    background-color: #0B1E36;
+    background-color: #0B3C5D;
     color: white;
 }
