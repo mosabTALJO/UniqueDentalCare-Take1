@@ -17,3 +17,14 @@ select option {
     background-color: #0B3C5D;
     color: white;
 }
+
+/* Marquee Animation */
+@keyframes scroll-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+    animation: scroll-marquee 40s linear infinite;
+    width: max-content;
+}

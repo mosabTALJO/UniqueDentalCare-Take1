@@ -52,11 +52,12 @@ function initReviews() {
             // Filter for reviews with 4 or more stars and limit to 3
             const highReviews = place.reviews.filter(review => review.rating >= 4).slice(0, 3);
 
-            highReviews.forEach(review => {
+            highReviews.forEach((review, index) => {
                 const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
 
                 const card = document.createElement('div');
-                card.className = 'glass p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full';
+                const delayMs = (index + 2) * 100; // start at 200ms
+                card.className = `glass p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full scroll-animate [animation-delay:${delayMs}ms]`;
 
                 card.innerHTML = `
                     <div class="flex items-center mb-6">
@@ -71,6 +72,10 @@ function initReviews() {
                 `;
 
                 container.appendChild(card);
+                if (window.scrollObserver) {
+                    card.classList.add('opacity-0');
+                    window.scrollObserver.observe(card);
+                }
             });
         }
     });
@@ -98,4 +103,118 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+});
+
+// Scroll Animations
+window.scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const animationClass = entry.target.dataset.animation || 'animate-fade-in-up';
+            entry.target.classList.add(animationClass);
+            entry.target.classList.remove('opacity-0');
+            window.scrollObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.scroll-animate').forEach(el => {
+        el.classList.add('opacity-0');
+        window.scrollObserver.observe(el);
+    });
+
+    // Custom Select Dropdown Logic
+    const customSelects = document.querySelectorAll('.custom-select-container');
+    
+    customSelects.forEach(container => {
+        const button = container.querySelector('button');
+        const display = container.querySelector('.select-display');
+        const input = container.querySelector('input');
+        const dropdown = container.querySelector('.dropdown-list');
+        const icon = container.querySelector('.dropdown-icon');
+        const options = container.querySelectorAll('li');
+
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = !dropdown.classList.contains('invisible');
+            
+            if (isOpen) {
+                closeDropdown();
+            } else {
+                dropdown.classList.remove('opacity-0', 'invisible', '-translate-y-2');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                const value = option.getAttribute('data-value');
+                input.value = value;
+                display.textContent = value;
+                display.classList.remove('text-gray-400');
+                display.classList.add('text-white');
+                closeDropdown();
+            });
+        });
+
+        function closeDropdown() {
+            dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
+            icon.style.transform = 'rotate(0deg)';
+        }
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (!container.contains(e.target)) {
+                closeDropdown();
+            }
+        });
+    });
+});
+
+// Video Modal Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const videoTriggers = document.querySelectorAll('.video-trigger');
+    const videoModal = document.getElementById('videoModal');
+    const videoModalOverlay = document.getElementById('videoModalOverlay');
+    const closeVideoModal = document.getElementById('closeVideoModal');
+    const videoContainer = document.getElementById('videoContainer');
+
+    if (!videoModal || !videoContainer) return;
+
+    function openModal(src) {
+        // Inject video element. preload="none" was set initially, but since we are injecting on demand,
+        // we can just autoplay it now because the user explicitly requested it by clicking the card.
+        videoContainer.innerHTML = `
+            <video controls autoplay class="w-full max-h-[80vh] rounded-xl outline-none">
+                <source src="${src}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        `;
+        
+        videoModal.classList.remove('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling background
+    }
+
+    function closeModal() {
+        videoModal.classList.add('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = '';
+        
+        // Remove video element to stop playback and free memory
+        setTimeout(() => {
+            videoContainer.innerHTML = '';
+        }, 300); // wait for fade out transition
+    }
+
+    videoTriggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const src = trigger.getAttribute('data-video-src');
+            if (src) openModal(src);
+        });
+    });
+
+    closeVideoModal.addEventListener('click', closeModal);
+    videoModalOverlay.addEventListener('click', closeModal);
 });
