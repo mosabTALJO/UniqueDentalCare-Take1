@@ -84,19 +84,19 @@ function initReviews() {
 // Mobile Sticky CTA Logic
 document.addEventListener('DOMContentLoaded', () => {
     const stickyCta = document.getElementById('mobile-sticky-cta');
-    const heroSection = document.getElementById('hero');
-    const contactSection = document.getElementById('contact');
+    const heroBtn = document.querySelector('#hero a[href="#contact"]');
+    const submitBtn = document.querySelector('#contactForm button[type="submit"]');
 
-    if (stickyCta && heroSection && contactSection) {
+    if (stickyCta && heroBtn && submitBtn) {
         window.addEventListener('scroll', () => {
             // Only apply on mobile devices (sm breakpoint is 640px in Tailwind)
             if (window.innerWidth >= 640) return;
 
-            const heroBottom = heroSection.getBoundingClientRect().bottom;
-            const contactTop = contactSection.getBoundingClientRect().top;
-            
-            // Show if we scrolled past hero AND haven't reached contact yet
-            if (heroBottom < 0 && contactTop > window.innerHeight - 50) {
+            const heroBtnBottom = heroBtn.getBoundingClientRect().bottom;
+            const submitBtnTop = submitBtn.getBoundingClientRect().top;
+
+            // Show if hero button is above viewport (not visible) AND submit button is below viewport (not visible)
+            if (heroBtnBottom < 0 && submitBtnTop > window.innerHeight) {
                 stickyCta.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
             } else {
                 stickyCta.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
@@ -104,6 +104,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Navbar scroll effect
+document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.getElementById('navbar');
+    const heroSection = document.getElementById('hero');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navPill = document.getElementById('nav-pill');
+
+    if (navbar && heroSection) {
+        window.addEventListener('scroll', () => {
+            const heroBottom = heroSection.getBoundingClientRect().bottom;
+            if (heroBottom <= 130) {
+                // Navbar background
+                navbar.classList.add('bg-white', 'shadow-md');
+                navbar.classList.remove('bg-transparent');
+
+                // Nav pill background (remove pill style so it blends in)
+                if (navPill) {
+                    navPill.classList.add('bg-transparent');
+                    navPill.classList.remove('bg-blue-100/40', 'backdrop-blur-lg', 'shadow-md');
+                }
+
+            } else {
+                // Navbar background
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('bg-white', 'shadow-md');
+
+                // Nav pill background (restore pill style)
+                if (navPill) {
+                    navPill.classList.add('bg-blue-100/40', 'backdrop-blur-lg', 'shadow-md');
+                    navPill.classList.remove('bg-transparent');
+                }
+            }
+        });
+    }
+});
+
+
 
 // Scroll Animations
 window.scrollObserver = new IntersectionObserver((entries) => {
@@ -128,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Custom Select Dropdown Logic
     const customSelects = document.querySelectorAll('.custom-select-container');
-    
+
     customSelects.forEach(container => {
         const button = container.querySelector('button');
         const display = container.querySelector('.select-display');
@@ -140,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
             const isOpen = !dropdown.classList.contains('invisible');
-            
+
             if (isOpen) {
                 closeDropdown();
             } else {
@@ -193,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 Your browser does not support the video tag.
             </video>
         `;
-        
+
         videoModal.classList.remove('opacity-0', 'pointer-events-none');
         document.body.style.overflow = 'hidden'; // Prevent scrolling background
     }
@@ -201,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeModal() {
         videoModal.classList.add('opacity-0', 'pointer-events-none');
         document.body.style.overflow = '';
-        
+
         // Remove video element to stop playback and free memory
         setTimeout(() => {
             videoContainer.innerHTML = '';
