@@ -222,15 +222,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!videoModal || !videoContainer) return;
 
+    // Preload videos in the background
+    const preloadedVideos = {};
+
+    videoTriggers.forEach(trigger => {
+        const src = trigger.getAttribute('data-video-src');
+        if (src && !preloadedVideos[src]) {
+            const video = document.createElement('video');
+            video.src = src;
+            video.preload = 'auto'; // Load in background
+            video.className = 'w-full max-h-[80vh] rounded-xl outline-none hidden';
+            video.controls = true;
+            preloadedVideos[src] = video;
+        }
+    });
+
     function openModal(src) {
-        // Inject video element. preload="none" was set initially, but since we are injecting on demand,
-        // we can just autoplay it now because the user explicitly requested it by clicking the card.
-        videoContainer.innerHTML = `
-            <video controls autoplay class="w-full max-h-[80vh] rounded-xl outline-none">
-                <source src="${src}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        `;
+        const video = preloadedVideos[src];
+        if (video) {
+            video.classList.remove('hidden');
+            videoContainer.appendChild(video);
+            video.play().catch(e => console.log('Autoplay prevented:', e));
+        } else {
+            videoContainer.innerHTML = `
+                <video controls autoplay class="w-full max-h-[80vh] rounded-xl outline-none">
+                    <source src="${src}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
+        }
 
         videoModal.classList.remove('opacity-0', 'pointer-events-none');
         document.body.style.overflow = 'hidden'; // Prevent scrolling background
@@ -240,9 +260,20 @@ document.addEventListener('DOMContentLoaded', () => {
         videoModal.classList.add('opacity-0', 'pointer-events-none');
         document.body.style.overflow = '';
 
-        // Remove video element to stop playback and free memory
+        const video = videoContainer.querySelector('video');
+        if (video) {
+            video.pause();
+        }
+
         setTimeout(() => {
-            videoContainer.innerHTML = '';
+            if (video && video.parentNode === videoContainer) {
+                // If it's a preloaded video, just remove it from DOM but don't destroy it
+                videoContainer.removeChild(video);
+                video.classList.add('hidden');
+            } else if (video) {
+                // Fallback for non-preloaded innerHTML approach
+                videoContainer.innerHTML = '';
+            }
         }, 300); // wait for fade out transition
     }
 
@@ -255,4 +286,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeVideoModal.addEventListener('click', closeModal);
     videoModalOverlay.addEventListener('click', closeModal);
+});
+
+// Testimonials Slider Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('testimonials-slider');
+    const group1 = document.getElementById('testimonials-group-1');
+    if (!slider || !group1) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let animationId;
+    const speed = 0.5; // Scroll speed
+
+    function play() {
+        if (!isDown) {
+            slider.scrollLeft += speed;
+            
+            // Seamless loop: if scrolled past group1, reset
+            if (slider.scrollLeft >= group1.offsetWidth) {
+                slider.scrollLeft -= group1.offsetWidth;
+            } else if (slider.scrollLeft <= 0 && speed < 0) {
+                slider.scrollLeft += group1.offsetWidth;
+            }
+        }
+        animationId = requestAnimationFrame(play);
+    }
+
+    // Start auto-scroll
+    animationId = requestAnimationFrame(play);
+
+    // Mouse events for dragging
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('cursor-grabbing');
+        slider.classList.remove('cursor-grab');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        if(isDown) {
+            isDown = false;
+            slider.classList.remove('cursor-grabbing');
+            slider.classList.add('cursor-grab');
+        }
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('cursor-grabbing');
+        slider.classList.add('cursor-grab');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll speed multiplier
+        slider.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Touch events for mobile dragging
+    slider.addEventListener('touchstart', () => {
+        isDown = true;
+    }, {passive: true});
+    
+    slider.addEventListener('touchend', () => {
+        isDown = false;
+    });
+
+    // Prevent native image dragging
+    slider.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+    });
 });
