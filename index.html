@@ -17,8 +17,8 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Tailwind Config -->
-    <script src="tailwind-config.js?v=1.0.2"></script>
-    <link rel="stylesheet" href="styles.css?v=1.0.2">
+    <script src="tailwind-config.js?v=1.0.3"></script>
+    <link rel="stylesheet" href="styles.css?v=1.0.3">
 </head>
 
 <body class="font-sans text-gray-800 bg-light antialiased">
@@ -268,7 +268,7 @@
                     <!-- Clinic 3 -->
                     <div
                         class="w-[280px] md:w-[400px] h-64 md:h-96 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group shrink-0 relative">
-                        <img src="Assets/Clinic/WhatsApp Image 2026-06-29 at 10.33.16 PM (2).jpeg" alt="Clinic Interior"
+                        <img src="Assets/Clinic/WhatsApp Image 2026-06-29 at 10.33.16 PM (2).webp" alt="Clinic Interior"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         <div
                             class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300 pointer-events-none">
@@ -285,7 +285,7 @@
                                 Before</div>
                         </div>
                         <div class="w-1/2 h-full relative border-l-2 border-white/20">
-                            <img src="Assets/BeforeAndAfters/Invisalign%20After%201.JPG" alt="Invisalign After"
+                            <img src="Assets/BeforeAndAfters/Invisalign%20After%201.webp" alt="Invisalign After"
                                 class="w-full h-full object-cover">
                             <div
                                 class="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-accent/90 text-white text-[10px] md:text-xs font-semibold px-2 md:px-3 py-1 rounded-full backdrop-blur-sm shadow-[0_2px_10px_rgba(50,204,193,0.4)]">
@@ -298,7 +298,7 @@
                     <!-- Clinic 4 -->
                     <div
                         class="w-[280px] md:w-[400px] h-64 md:h-96 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group shrink-0 relative">
-                        <img src="Assets/Clinic/WhatsApp Image 2026-06-29 at 10.33.16 PM.jpeg" alt="Clinic Interior"
+                        <img src="Assets/Clinic/WhatsApp Image 2026-06-29 at 10.33.16 PM.webp" alt="Clinic Interior"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         <div
                             class="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300 pointer-events-none">
@@ -440,9 +440,10 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="min-h-screen lg:h-screen flex items-center bg-white py-16 lg:py-0 overflow-hidden">
+    <section id="about"
+        class="min-h-screen bg-white py-16 lg:pt-32 lg:pb-24 overflow-hidden transition-all duration-500">
         <div class="max-w-[1920px] w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-40">
-            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <div class="flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
                 <!-- Portrait Placeholder -->
                 <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
                     <div
@@ -461,20 +462,69 @@
                         About The Doctor</h2>
                     <h3
                         class="text-3xl md:text-4xl font-sans font-bold text-primary mb-6 leading-snug text-center lg:text-left scroll-animate [animation-delay:100ms]">
-                        40+ Years of Excellence in Modern Dentistry
+                        Meet Dr. Amjad Kinjawi, DMD
                     </h3>
                     <p
                         class="text-gray-600 mb-6 leading-relaxed text-lg font-light scroll-animate [animation-delay:200ms]">
-                        Backed by over 40 years of clinical excellence, Dr. Amjad Kinjawi, DMD, combines master-level
-                        expertise in general and cosmetic dentistry with a warm, patient-first approach. He utilizes
-                        advanced technology to eliminate dental anxiety and craft beautiful, confident smiles.
+                        Dr. Kinjawi is a Syrian-American dentist, healthcare entrepreneur, and humanitarian dedicated to
+                        providing comprehensive, patient-centered dental care. As the owner and primary practitioner of
+                        Unique Dental Care, he has proudly served patients throughout Bristol County since 2000.
                     </p>
                     <p
-                        class="text-gray-600 mb-10 leading-relaxed text-lg font-light scroll-animate [animation-delay:300ms]">
-                        Founded by Dr. Kinjawi over two decades ago, Unique Dental Care is a trusted staple of the North
-                        Attleborough community. The modern practice blends cutting-edge dental advancements with a
-                        welcoming environment for the entire family.
+                        class="text-gray-600 mb-6 leading-relaxed text-lg font-light scroll-animate [animation-delay:300ms]">
+                        Dr. Kinjawi earned his dental degree in Damascus before pursuing advanced training in Minor Oral
+                        Surgery at Montpellier University Medical School in France. He later moved to the United States,
+                        where he received his Doctor of Dental Medicine (DMD) from Boston University School of Dental
+                        Medicine.
                     </p>
+
+                    <div id="about-read-more-btn"
+                        class="mb-10 text-center lg:text-left scroll-animate [animation-delay:400ms]">
+                        <button
+                            onclick="document.getElementById('about-more-content').classList.remove('grid-rows-[0fr]', 'opacity-0'); document.getElementById('about-more-content').classList.add('grid-rows-[1fr]', 'opacity-100'); document.getElementById('about-read-more-btn').classList.add('hidden');"
+                            class="text-accent hover:text-primary transition-colors duration-200 font-medium text-lg underline underline-offset-4 cursor-pointer">Read
+                            more...</button>
+                    </div>
+
+                    <div id="about-more-content"
+                        class="grid grid-rows-[0fr] opacity-0 transition-all duration-700 ease-in-out">
+                        <div class="overflow-hidden">
+                            <div class="pt-2">
+                                <p class="text-gray-600 mb-6 leading-relaxed text-lg font-light">
+                                    With more than 30 years of clinical experience, Dr. Kinjawi provides a wide range of
+                                    general, cosmetic, and restorative dental treatments. His advanced training includes
+                                    minor oral surgery, dental implants, Invisalign treatment, and oral appliance
+                                    therapy for sleep apnea, allowing him to offer comprehensive solutions tailored to
+                                    each patient’s needs.
+                                </p>
+                                <p class="text-gray-600 mb-6 leading-relaxed text-lg font-light">
+                                    Committed to delivering the highest standard of care, Dr. Kinjawi has completed more
+                                    than 400 hours of continuing education in cosmetic, restorative, implant, and
+                                    surgical dentistry. His dedication to lifelong learning ensures that his patients
+                                    benefit from the latest techniques, technology, and evidence-based treatment
+                                    approaches.
+                                </p>
+                                <p class="text-gray-600 mb-6 leading-relaxed text-lg font-light">
+                                    Beyond the dental office, Dr. Kinjawi is passionate about humanitarian work and
+                                    community service. He and his family have been proud members of the North
+                                    Attleborough community for many years. Fluent in English, Arabic, and French, he
+                                    enjoys building meaningful relationships with patients from diverse backgrounds
+                                    based on trust and compassion, and helping them feel comfortable and understood
+                                    throughout their dental journey.
+                                </p>
+                                <p class="text-gray-600 mb-6 leading-relaxed text-lg font-light">
+                                    His mission is to provide every patient with personalized care in a welcoming
+                                    environment while helping them achieve healthy, confident smiles.
+                                </p>
+                                <div class="mb-10 text-center lg:text-left">
+                                    <button
+                                        onclick="document.getElementById('about-more-content').classList.remove('grid-rows-[1fr]', 'opacity-100'); document.getElementById('about-more-content').classList.add('grid-rows-[0fr]', 'opacity-0'); setTimeout(() => document.getElementById('about-read-more-btn').classList.remove('hidden'), 700); document.getElementById('about').scrollIntoView({behavior: 'smooth', block: 'start'});"
+                                        class="text-accent hover:text-primary transition-colors duration-200 font-medium text-lg underline underline-offset-4 cursor-pointer">Read
+                                        less...</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="border-t border-gray-100 pt-8 scroll-animate [animation-delay:400ms]">
                         <div class="mb-4">
                             <div class="font-sans text-lg font-medium text-primary text-center lg:text-left">
@@ -616,7 +666,7 @@
             <!-- Patient Testimonials Single Video -->
             <div class="flex justify-center scroll-animate [animation-delay:200ms] mb-8">
                 <div class="relative w-full max-w-sm md:max-w-md rounded-2xl overflow-hidden shadow-2xl group cursor-pointer aspect-[9/16] bg-gray-900 video-trigger"
-                    data-video-src="https://uniquedentalcarena.web.app/Assets/Videos/WithCaptions.mp4">
+                    data-video-src="https://www.youtube.com/embed/6HtgEOYTJWY">
                     <img src="Assets/Videos/IMG_9950_Screenshot.png" alt="Patient Thumbnail"
                         class="absolute inset-0 w-full h-full object-cover">
                     <div
@@ -645,16 +695,15 @@
     <div id="videoModal"
         class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-sm cursor-pointer" id="videoModalOverlay"></div>
-        <div class="relative z-10 w-full max-w-4xl px-4 flex flex-col items-center">
+        <div class="relative z-10 w-full max-w-[calc(80vh*9/16)] flex flex-col items-center">
             <button id="closeVideoModal"
-                class="absolute -top-12 right-4 text-white hover:text-accent transition-colors duration-200 focus:outline-none">
+                class="absolute -top-12 right-0 text-white hover:text-accent transition-colors duration-200 focus:outline-none">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                     </path>
                 </svg>
             </button>
-            <div
-                class="w-full bg-black rounded-xl overflow-hidden shadow-2xl aspect-auto max-h-[80vh] relative flex items-center justify-center">
+            <div class="w-full aspect-auto max-h-[80vh] relative flex items-center justify-center">
                 <div id="videoContainer" class="w-full h-full flex items-center justify-center max-h-[80vh]"></div>
             </div>
         </div>
@@ -806,7 +855,7 @@
         </a>
     </div>
 
-    <script src="script.js?v=1.0.2"></script>
+    <script src="script.js?v=1.0.3"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0qDD2xcPW1T7MfimzSAv-RDXT_2eYTq8&libraries=places&callback=initReviews"
         async defer></script>

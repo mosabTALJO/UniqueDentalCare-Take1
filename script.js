@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     videoTriggers.forEach(trigger => {
         const src = trigger.getAttribute('data-video-src');
-        if (src && !preloadedVideos[src]) {
+        if (src && !preloadedVideos[src] && !src.includes('youtube.com')) {
             const video = document.createElement('video');
             video.src = src;
             video.preload = 'auto'; // Load in background
@@ -236,20 +236,27 @@ document.addEventListener('DOMContentLoaded', () => {
             preloadedVideos[src] = video;
         }
     });
+    // <iframe src="${src}?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="w-full max-w-[calc(80vh*9/16)] h-[80vh] rounded-xl outline-none shadow-2xl bg-black"></iframe>
 
     function openModal(src) {
-        const video = preloadedVideos[src];
-        if (video) {
-            video.classList.remove('hidden');
-            videoContainer.appendChild(video);
-            video.play().catch(e => console.log('Autoplay prevented:', e));
-        } else {
+        if (src.includes('youtube.com')) {
             videoContainer.innerHTML = `
-                <video controls autoplay class="w-full max-h-[80vh] rounded-xl outline-none">
-                    <source src="${src}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <iframe src="${src}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="w-full max-w-[calc(80vh*9/16)] aspect-[9/16] max-h-[80vh] rounded-xl outline-none shadow-2xl bg-black"></iframe>
             `;
+        } else {
+            const video = preloadedVideos[src];
+            if (video) {
+                video.classList.remove('hidden');
+                videoContainer.appendChild(video);
+                video.play().catch(e => console.log('Autoplay prevented:', e));
+            } else {
+                videoContainer.innerHTML = `
+                    <video controls autoplay class="w-full max-h-[80vh] rounded-xl outline-none">
+                        <source src="${src}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+            }
         }
 
         videoModal.classList.remove('opacity-0', 'pointer-events-none');
@@ -266,12 +273,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         setTimeout(() => {
-            if (video && video.parentNode === videoContainer) {
+            if (video && video.parentNode === videoContainer && Object.values(preloadedVideos).includes(video)) {
                 // If it's a preloaded video, just remove it from DOM but don't destroy it
                 videoContainer.removeChild(video);
                 video.classList.add('hidden');
-            } else if (video) {
-                // Fallback for non-preloaded innerHTML approach
+            } else {
+                // Fallback for non-preloaded innerHTML approach and iframes
                 videoContainer.innerHTML = '';
             }
         }, 300); // wait for fade out transition
@@ -303,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function play() {
         if (!isDown) {
             slider.scrollLeft += speed;
-            
+
             // Seamless loop: if scrolled past group1, reset
             if (slider.scrollLeft >= group1.offsetWidth) {
                 slider.scrollLeft -= group1.offsetWidth;
@@ -327,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     slider.addEventListener('mouseleave', () => {
-        if(isDown) {
+        if (isDown) {
             isDown = false;
             slider.classList.remove('cursor-grabbing');
             slider.classList.add('cursor-grab');
@@ -347,12 +354,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const walk = (x - startX) * 2; // Scroll speed multiplier
         slider.scrollLeft = scrollLeft - walk;
     });
-    
+
     // Touch events for mobile dragging
     slider.addEventListener('touchstart', () => {
         isDown = true;
-    }, {passive: true});
-    
+    }, { passive: true });
+
     slider.addEventListener('touchend', () => {
         isDown = false;
     });
